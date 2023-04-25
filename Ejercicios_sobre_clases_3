@@ -1,0 +1,85 @@
+import java.util.Random;
+
+public class Password {
+    private int longitud;
+    private String contrasena;
+
+    public Password() {
+        this.longitud = 8;
+        generarPassword();
+    }
+
+    public Password(int longitud) {
+        this.longitud = longitud;
+        generarPassword();
+    }
+
+    public boolean esFuerte() {
+        int mayusculas = 0, minusculas = 0, numeros = 0;
+
+        for (int i = 0; i < contrasena.length(); i++) {
+            char caracter = contrasena.charAt(i);
+            if (Character.isUpperCase(caracter)) {
+                mayusculas++;
+            } else if (Character.isLowerCase(caracter)) {
+                minusculas++;
+            } else if (Character.isDigit(caracter)) {
+                numeros++;
+            }
+        }
+
+        return mayusculas > 2 && minusculas > 1 && numeros > 5;
+    }
+
+    public void generarPassword() {
+        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder builder = new StringBuilder();
+        Random random = new Random();
+
+        for (int i = 0; i < longitud; i++) {
+            builder.append(caracteres.charAt(random.nextInt(caracteres.length())));
+        }
+
+        contraseña = builder.toString();
+    }
+
+    public int getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(int longitud) {
+        this.longitud = longitud;
+        generarPassword();
+    }
+
+    public String getContraseña() {
+        return contrasena;
+    }
+}
+
+CÓDIGO PARA LA CLASE EJECUTABLE
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Introduce la longitud de las contraseñas: ");
+        int longitud = scanner.nextInt();
+
+        System.out.print("Introduce la cantidad de contraseñas que quieres generar: ");
+        int cantidad = scanner.nextInt();
+
+        Password[] passwords = new Password[cantidad];
+        boolean[] contraseñasFuertes = new boolean[cantidad];
+
+        for (int i = 0; i < cantidad; i++) {
+            passwords[i] = new Password(longitud);
+            contraseñasFuertes[i] = passwords[i].esFuerte();
+        }
+
+        for (int i = 0; i < cantidad; i++) {
+            System.out.println("Contraseña " + (i + 1) + ": " + passwords[i].getContraseña() + " " + contraseñasFuertes[i]);
+        }
+    }
+}
