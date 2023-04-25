@@ -1,0 +1,61 @@
+public class Libro {
+    private String isbn;
+    private String titulo;
+    private String autor;
+    private int numPaginas;
+    
+    public Libro(String isbn, String titulo, String autor, int numPaginas) {
+        this.isbn = isbn;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.numPaginas = numPaginas;
+    }
+    
+    // getters y setters
+    public String getIsbn() {
+        return isbn;
+    }
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+    public String getTitulo() {
+        return titulo;
+    }
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+    public String getAutor() {
+        return autor;
+    }
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+    public int getNumPaginas() {
+        return numPaginas;
+    }
+    public void setNumPaginas(int numPaginas) {
+        this.numPaginas = numPaginas;
+    }
+    
+    // método toString
+    @Override
+    public String toString() {
+        return "El libro con ISBN " + isbn + ", creado por " + autor + ", tiene " + numPaginas + " páginas.";
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Libro libro1 = new Libro("123456789", "El Quijote", "Miguel de Cervantes", 1087);
+        Libro libro2 = new Libro("987654321", "Cien años de soledad", "Gabriel García Márquez", 471);
+        
+        System.out.println(libro1.toString());
+        System.out.println(libro2.toString());
+        
+        if (libro1.getNumPaginas() > libro2.getNumPaginas()) {
+            System.out.println("El libro " + libro1.getTitulo() + " tiene más páginas que " + libro2.getTitulo());
+        } else {
+            System.out.println("El libro " + libro2.getTitulo() + " tiene más páginas que " + libro1.getTitulo());
+        }
+    }
+}
